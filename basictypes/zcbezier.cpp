@@ -89,7 +89,7 @@ void zcBezier::fromJson(const QJsonObject &obj) {
     _endPressure = obj["pe"].toDouble();
 }
 
-QDataStream & operator >> (QDataStream & in, zcBezier & b) {
+LIBQTEXTENSIONS_EXPORT QDataStream & operator >> (QDataStream & in, zcBezier & b) {
     MAGIC_ASSERT(in, BEZIER_TYPE, 1);
 #define P(p)    { qreal x, y; in >> x; in >> y; p.setX(x);p.setY(y); }
     P(b._start)
@@ -102,6 +102,6 @@ QDataStream & operator >> (QDataStream & in, zcBezier & b) {
     return in;
 }
 
-QDataStream & operator >> (QDataStream & in, zcBezier * b) {
+LIBQTEXTENSIONS_EXPORT QDataStream & operator >> (QDataStream & in, zcBezier * b) {
     return operator >>(in, *b);
 }

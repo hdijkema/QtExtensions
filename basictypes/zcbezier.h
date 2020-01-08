@@ -75,7 +75,7 @@ public:
             case 3: return endPt();
             default: throw("Bezier has index 0 .. 3");
         }
-        return startPt();
+        //return startPt();
     }
 
     const QPointF & operator[](int i) const {
@@ -86,7 +86,7 @@ public:
             case 3: return endPt();
             default: throw("Bezier has index 0 .. 3");
         }
-        return startPt();
+        //return startPt();
     }
 
     QRectF rectPt() {
@@ -103,14 +103,15 @@ public:
 
 public:
     QJsonObject toJson() const;
-    friend QDataStream & operator << (QDataStream & out, const zcBezier & b);
-    friend QDataStream & operator << (QDataStream & out, const zcBezier * p);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator << (QDataStream & out, const zcBezier & b);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator << (QDataStream & out, const zcBezier * p);
+
     void fromJson(const QJsonObject & obj);
-    friend QDataStream & operator >> (QDataStream & out, zcBezier & b);
-    friend QDataStream & operator >> (QDataStream & out, zcBezier * p);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator >> (QDataStream & out, zcBezier & b);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator >> (QDataStream & out, zcBezier * p);
 
 public:
-    friend QDebug & operator<< (QDebug & d, const zcBezier & input);
+    friend LIBQTEXTENSIONS_EXPORT QDebug & operator<< (QDebug & d, const zcBezier & input);
 };
 
 #endif // BEZIER_H

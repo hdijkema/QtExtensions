@@ -35,10 +35,10 @@ public:
     bool isValid();
 
 public:
-    friend QDataStream & operator << (QDataStream & out, const zcColor & col);
-    friend QDataStream & operator << (QDataStream & out, const zcColor * col);
-    friend QDataStream & operator >> (QDataStream & out, zcColor & col);
-    friend QDataStream & operator >> (QDataStream & out, zcColor * col);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator << (QDataStream & out, const zcColor & col);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator << (QDataStream & out, const zcColor * col);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator >> (QDataStream & out, zcColor & col);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator >> (QDataStream & out, zcColor * col);
 
     QJsonObject toJson() const;
     void fromJson(const QJsonObject & obj);

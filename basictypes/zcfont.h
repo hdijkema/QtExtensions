@@ -18,10 +18,10 @@ public:
     zcFont(const QString & family, int pt);
 
 public:
-    friend QDataStream & operator << (QDataStream & out, const zcFont & f);
-    friend QDataStream & operator << (QDataStream & out, const zcFont * f);
-    friend QDataStream & operator >> (QDataStream & in, zcFont & f);
-    friend QDataStream & operator >> (QDataStream & in, zcFont * f);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator << (QDataStream & out, const zcFont & f);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator << (QDataStream & out, const zcFont * f);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator >> (QDataStream & in, zcFont & f);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator >> (QDataStream & in, zcFont * f);
 
     void fromJson(const QJsonObject & obj);
     QJsonObject toJson() const;

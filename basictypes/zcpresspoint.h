@@ -33,10 +33,10 @@ public:
 
 public:
     QJsonObject toJson() const;
-    friend QDataStream & operator << (QDataStream & out, const zcPressPoint & p);
-    friend QDataStream & operator << (QDataStream & out, const zcPressPoint * p);
-    friend QDataStream & operator >> (QDataStream & in, zcPressPoint & p);
-    friend QDataStream & operator >> (QDataStream & in, zcPressPoint * p);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator << (QDataStream & out, const zcPressPoint & p);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator << (QDataStream & out, const zcPressPoint * p);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator >> (QDataStream & in, zcPressPoint & p);
+    friend LIBQTEXTENSIONS_EXPORT QDataStream & operator >> (QDataStream & in, zcPressPoint * p);
     void fromJson(const QJsonObject &obj);
 };
 
