@@ -1,0 +1,35 @@
+include($QT_INSTALL_DOCS/global/compat.qdocconf)
+include($QT_INSTALL_DOCS/global/fileextensions.qdocconf)
+include($QT_INSTALL_DOCS/global/qt-cpp-defines.qdocconf)
+include($QT_INSTALL_DOCS/global/macros.qdocconf)
+include($QT_INSTALL_DOCS/global/qt-module-defaults-online.qdocconf)
+include($QT_INSTALL_DOCS/global/html-header-online.qdocconf)
+
+HTML.footer = \
+"        </div>\n" \
+"       </div>\n" \
+"   </div>\n" \
+"   </div>\n" \
+"</div>\n" \
+"<div class=\"footer\">\n" \
+"   <p>\n" \
+"   <acronym title=\"Copyright\">&copy;</acronym> Hans Dijkema\n" \
+"   </p>\n" \
+"</div>\n" \
+
+
+project     = QtExtensions
+description = Qt Extensions Reference Documentation
+version     = $QTEXTENSIONS_VERSION
+language    = cpp
+
+syntaxhighlighting = true
+spurious = "Can't link to 'index.html'"
+
+outputdir = html
+
+headerdirs = C:/Qt/5.14.0/msvc2017_64/include
+
+headers = qhtmlmenu/qhtmlmenu.h
+sources = libqtextensions.cpp \
+   qhtmlmenu/qhtmlmenu.cpp
