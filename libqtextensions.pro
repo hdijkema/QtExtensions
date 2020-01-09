@@ -11,7 +11,7 @@ win32: PREFIX=c:/devel/libraries/win64
 win32:SRC_PREFIX=../qtextensions
 unix:SRC_PREFIX=../qtextensions
 
-QT += widgets
+QT += core gui widgets
 
 TEMPLATE = lib
 DEFINES += LIBQTEXTENSIONS_LIBRARY \
@@ -75,8 +75,10 @@ win32: documentation.extra = $$shell_path($$SRC_PREFIX\qtextensions_mkdoc.bat) \
 
 #### Sources
 include(basictypes/basictypes.pri)
-include(qhtmlmenu/qhtmlmenu.pri)
-include(qhtmldelegate/qhtmldelegate.pri)
+include(zchtmlmenu/zchtmlmenu.pri)
+include(zchtmldelegate/zchtmldelegate.pri)
+include(zccoloricon/zccoloricon.pri)
+include(zccolorpicker/zccolorpicker.pri);
 
 INSTALLS += headers
 INSTALLS += documentation

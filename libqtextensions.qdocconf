@@ -1,4 +1,4 @@
-include($QT_INSTALL_DOCS/global/compat.qdocconf)
+﻿include($QT_INSTALL_DOCS/global/compat.qdocconf)
 include($QT_INSTALL_DOCS/global/fileextensions.qdocconf)
 include($QT_INSTALL_DOCS/global/qt-cpp-defines.qdocconf)
 include($QT_INSTALL_DOCS/global/macros.qdocconf)
@@ -28,8 +28,8 @@ spurious = "Can't link to 'index.html'"
 
 outputdir = html
 
-headerdirs = C:/Qt/5.14.0/msvc2017_64/include
+headerdirs = $QT_INSTALL_HEADERS
 
-headers = qhtmlmenu/qhtmlmenu.h
+headers = zchtmlmenu/zchtmlmenu.h
 sources = libqtextensions.cpp \
-   qhtmlmenu/qhtmlmenu.cpp
+   zchtmlmenu/zchtmlmenu.cpp

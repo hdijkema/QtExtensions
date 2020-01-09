@@ -12,6 +12,10 @@ FOR /F "tokens=* USEBACKQ" %%F IN (`%QMAKE% -query QT_INSTALL_DOCS`) DO (
 SET QT_INSTALL_DOCS=%%F
 )
 
+FOR /F "tokens=* USEBACKQ" %%F IN (`%QMAKE% -query QT_INSTALL_HEADERS`) DO (
+SET QT_INSTALL_HEADERS=%%F
+)
+
 FOR /F "tokens=* USEBACKQ" %%F IN (`%QMAKE% -query QT_VERSION`) DO (
 SET QT_VERSION=%%F
 SET QT_VER=%%F

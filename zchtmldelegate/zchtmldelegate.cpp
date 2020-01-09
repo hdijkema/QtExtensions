@@ -27,16 +27,16 @@ EL***/
 #include <QModelIndex>
 #include <QDebug>
 
-#include "qhtmldelegate.h"
+#include "zchtmldelegate.h"
 #include "zcfont.h"
 
-QHtmlDelegate::QHtmlDelegate(QObject *parent)
+zcHtmlDelegate::zcHtmlDelegate(QObject *parent)
     : QStyledItemDelegate(parent)
 {
     _zoomFactor = 1.0;
 }
 
-void QHtmlDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void zcHtmlDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     painter->save();
 
@@ -64,7 +64,7 @@ void QHtmlDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
     painter->restore();
 }
 
-QSize QHtmlDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+QSize zcHtmlDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     QStyleOptionViewItem optionV4 = option;
     initStyleOption(&optionV4, index);
@@ -77,7 +77,7 @@ QSize QHtmlDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIn
     return QSize(static_cast<int>(doc.idealWidth()), static_cast<int>(doc.size().height()));
 }
 
-void QHtmlDelegate::setZoomFactor(qreal factor)
+void zcHtmlDelegate::setZoomFactor(qreal factor)
 {
     _zoomFactor = factor;
     QModelIndex idx;

@@ -1,12 +1,12 @@
 ﻿#ifndef HTMLDELAGATE_H
 #define HTMLDELAGATE_H
-/***BL
+/**
 
-    This file is part of ZCLibs (https://github.com/hdijkema/zclibs).
+    This file is part of QtExtensions (https://github.com/hdijkema/QtExtensions).
 
-    (c) Hans Dijkema 2016, 2017, 2018
+    (c) Hans Dijkema 2020
 
-    Foobar is free software: you can redistribute it and/or modify
+    QtExtensions is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
@@ -17,9 +17,9 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU Lesser General Public License
-    along with ZCLibs. If not, see <https://www.gnu.org/licenses/lgpl.html>.
+    along with QtExtensions. If not, see <https://www.gnu.org/licenses/lgpl.html>.
 
-EL***/
+**/
 
 #include <QObject>
 #include <QStyledItemDelegate>
@@ -28,14 +28,14 @@ EL***/
 #include "libqtextensions_global.h"
 
 
-class LIBQTEXTENSIONS_EXPORT QHtmlDelegate : public QStyledItemDelegate
+class LIBQTEXTENSIONS_EXPORT zcHtmlDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 private:
     qreal                 _zoomFactor;
     mutable QTextDocument _doc;
 public:
-    QHtmlDelegate(QObject *parent = nullptr);
+    zcHtmlDelegate(QObject *parent = nullptr);
     void setZoomFactor(qreal factor);
 protected:
     void paint ( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const;

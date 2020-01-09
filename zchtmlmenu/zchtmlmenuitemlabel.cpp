@@ -1,6 +1,4 @@
-﻿#ifndef LIBQTEXTENSIONS_GLOBAL_H
-#define LIBQTEXTENSIONS_GLOBAL_H
-/**
+﻿/**
 
     This file is part of QtExtensions (https://github.com/hdijkema/QtExtensions).
 
@@ -21,16 +19,15 @@
 
 **/
 
-#include <QtCore/qglobal.h>
+#include "zchtmlmenuitemlabel.h"
 
-#if defined(QTEXTENSIONSTEST)
-#  define LIBQTEXTENSIONS_EXPORT
-#else
-#  if defined(LIBQTEXTENSIONS_LIBRARY)
-#    define LIBQTEXTENSIONS_EXPORT Q_DECL_EXPORT
-#  else
-#    define LIBQTEXTENSIONS_EXPORT Q_DECL_IMPORT
-#  endif
-#endif
+#include <QMouseEvent>
 
-#endif // LIBQTEXTENSIONS_GLOBAL_H
+internal_zcHtmlMenuItemLabel::internal_zcHtmlMenuItemLabel(QWidget *parent) : QLabel(parent)
+{
+}
+
+void internal_zcHtmlMenuItemLabel::mouseReleaseEvent(QMouseEvent *event)
+{
+    event->ignore();
+}

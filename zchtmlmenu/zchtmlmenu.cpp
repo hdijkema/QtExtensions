@@ -1,24 +1,45 @@
-﻿#include "qhtmlmenu.h"
+﻿/**
+
+    This file is part of QtExtensions (https://github.com/hdijkema/QtExtensions).
+
+    (c) Hans Dijkema 2020
+
+    QtExtensions is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Foobar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with QtExtensions. If not, see <https://www.gnu.org/licenses/lgpl.html>.
+
+**/
+
+#include "zchtmlmenu.h"
 
 #include <QWidgetAction>
 #include <QStyleOptionMenuItem>
 
-#include "qhtmlmenu.h"
-#include "qhtmlmenuitem.h"
+#include "zchtmlmenu.h"
+#include "zchtmlmenuitem.h"
 
-#define QHTMLMENU_VERSION_MAJOR 0
-#define QHTMLMENU_VERSION_MINOR 1
+#define zcHtmlMenu_VERSION_MAJOR 0
+#define zcHtmlMenu_VERSION_MINOR 1
 
 /*!
-    \class QHtmlMenu
+    \class zcHtmlMenu
     \inmodule QtExtensions
 
-    \brief The QHtmlMenu class provides a menu widget based on QMenu for use in menu
+    \brief The zcHtmlMenu class provides a menu widget based on QMenu for use in menu
     bars, context menus, and other popup menus. It supports the QLabel Html subset.
 
     \section1 Actions
 
-    QHtmlMenu extends QMenu with extra functions to add actions:
+    zcHtmlMenu extends QMenu with extra functions to add actions:
 
     addHtmlAction() and insertHtmlAction() functions.
 
@@ -29,7 +50,7 @@
     \code
       (...)
 
-      QHtmlMenu *popup = new QHtmlMenu(tr("Insert texts"), this);
+      zcHtmlMenu *popup = new zcHtmlMenu(tr("Insert texts"), this);
 
       QAction *a1 = popup->addAction(tr("Normal action 1"));
       QAction *a2 = popup->addHtmlAction(tr("<b>Bold text</b> to be inserted"));
@@ -37,9 +58,9 @@
 
       QAction *choosen_action = popup->exec(QCursor::pos());
 
-      if (choosen_action == a1) { /\b{}* do something *\b{}/ }
-      else if (choosen_action == a2) { /\b{}* insert bold text *\b{}/ }
-      else if (choosen_action == a3) { /\b{}* insert italic text *\b{}/ }
+      if (choosen_action == a1) { / * do something * / }
+      else if (choosen_action == a2) { / * insert bold text * / }
+      else if (choosen_action == a3) { / * insert italic text * / }
 
       popup->deleteLater();
 
@@ -48,17 +69,17 @@
 */
 
 /*!
-    \brief Creates a QHtmlMenu with an empty title and given parent \a parent
+    \brief Creates a zcHtmlMenu with an empty title and given parent \a parent
  */
-QHtmlMenu::QHtmlMenu(QWidget *parent)
-    : QHtmlMenu("", parent)
+zcHtmlMenu::zcHtmlMenu(QWidget *parent)
+    : zcHtmlMenu("", parent)
 {
 }
 
 /*!
-    \brief Creates a QHtmlMenu with the given title \a title and parent \a parent
+    \brief Creates a zcHtmlMenu with the given title \a title and parent \a parent
 */
-QHtmlMenu::QHtmlMenu(const QString &title, QWidget *parent)
+zcHtmlMenu::zcHtmlMenu(const QString &title, QWidget *parent)
     : QMenu(title, parent)
 {
     _current_action = nullptr;
@@ -91,10 +112,10 @@ QHtmlMenu::QHtmlMenu(const QString &title, QWidget *parent)
  * and \l {https://doc.qt.io/qt-5/qaction.html#text-prop} {setTitle()}, see \l{https://doc.qt.io/qt-5/qaction.html} {QAction}.
  * These are the only ones supported by this class.
  */
-QAction *QHtmlMenu::addHtmlAction(const QIcon &icon, const QString &html_label)
+QAction *zcHtmlMenu::addHtmlAction(const QIcon &icon, const QString &html_label)
 {
     QWidgetAction *wa = qobject_cast<QWidgetAction *>(createHtmlAction(icon, html_label));
-    internal_QHtmlMenuItem *item = qobject_cast<internal_QHtmlMenuItem *>(wa->defaultWidget());
+    internal_zcHtmlMenuItem *item = qobject_cast<internal_zcHtmlMenuItem *>(wa->defaultWidget());
 
     addAction(wa);
     _actions.insert(item, wa);
@@ -106,7 +127,7 @@ QAction *QHtmlMenu::addHtmlAction(const QIcon &icon, const QString &html_label)
 /*!
  * \brief Convenience function for addHtmlAction() with empty icon and \a html_label.
  */
-QAction *QHtmlMenu::addHtmlAction(const QString &html_label)
+QAction *zcHtmlMenu::addHtmlAction(const QString &html_label)
 {
     return addHtmlAction(QIcon(), html_label);
 }
@@ -115,13 +136,13 @@ QAction *QHtmlMenu::addHtmlAction(const QString &html_label)
 /*!
  * \brief Inserts a new action before \a before, based on \a icon and \a html_label.
  *
- * \return QHtmlMenu takes ownership of the returned QAction.
+ * \return zcHtmlMenu takes ownership of the returned QAction.
  * For Supported properties of the returned QAction, see addHtmlAction()
  */
-QAction *QHtmlMenu::insertHtmlAction(QAction *before, const QIcon &icon, const QString &html_label)
+QAction *zcHtmlMenu::insertHtmlAction(QAction *before, const QIcon &icon, const QString &html_label)
 {
     QWidgetAction *wa = qobject_cast<QWidgetAction *>(createHtmlAction(icon, html_label));
-    internal_QHtmlMenuItem *item = qobject_cast<internal_QHtmlMenuItem *>(wa->defaultWidget());
+    internal_zcHtmlMenuItem *item = qobject_cast<internal_zcHtmlMenuItem *>(wa->defaultWidget());
 
     insertAction(before, wa);
     _actions.insert(item, wa);
@@ -133,16 +154,16 @@ QAction *QHtmlMenu::insertHtmlAction(QAction *before, const QIcon &icon, const Q
 /*!
  * \brief Convenience function for insertHtmlAction() with empty icon, \a before and \a html_label.
  */
-QAction *QHtmlMenu::insertHtmlAction(QAction *before, const QString &html_label)
+QAction *zcHtmlMenu::insertHtmlAction(QAction *before, const QString &html_label)
 {
     return insertHtmlAction(before, QIcon(), html_label);
 }
 
 
 
-QAction *QHtmlMenu::createHtmlAction(const QIcon &icon, const QString &html_label)
+QAction *zcHtmlMenu::createHtmlAction(const QIcon &icon, const QString &html_label)
 {
-    internal_QHtmlMenuItem *item = new internal_QHtmlMenuItem(icon, html_label, this);
+    internal_zcHtmlMenuItem *item = new internal_zcHtmlMenuItem(icon, html_label, this);
     int hmargin = _action_h_margin;
     int vmargin = _action_v_margin;
     int height = _text_height;
@@ -156,19 +177,19 @@ QAction *QHtmlMenu::createHtmlAction(const QIcon &icon, const QString &html_labe
     wa->setIcon(icon);
     wa->setText(html_label);
 
-    connect(wa, &QWidgetAction::triggered, this, &QHtmlMenu::htmlActionTriggered);
-    connect(wa, &QAction::changed, this, &QHtmlMenu::htmlActionChanged);
+    connect(wa, &QWidgetAction::triggered, this, &zcHtmlMenu::htmlActionTriggered);
+    connect(wa, &QAction::changed, this, &zcHtmlMenu::htmlActionChanged);
 
     return wa;
 }
 
 
-QAction *QHtmlMenu::exec()
+QAction *zcHtmlMenu::exec()
 {
     return exec(pos());
 }
 
-QAction *QHtmlMenu::exec(const QPoint &pos, QAction *action)
+QAction *zcHtmlMenu::exec(const QPoint &pos, QAction *action)
 {
     QAction *a = QMenu::exec(pos, action);
     if (a == nullptr) {
@@ -179,7 +200,7 @@ QAction *QHtmlMenu::exec(const QPoint &pos, QAction *action)
     return a;
 }
 
-QFont QHtmlMenu::drawBackground(QPainter &p, const QRect &, bool hovered, internal_QHtmlMenuItem *label)
+QFont zcHtmlMenu::drawBackground(QPainter &p, const QRect &, bool hovered, internal_zcHtmlMenuItem *label)
 {
     QStyleOptionMenuItem opt;
     QAction *action = _actions[label];
@@ -194,7 +215,7 @@ QFont QHtmlMenu::drawBackground(QPainter &p, const QRect &, bool hovered, intern
     return opt.font;
 }
 
-void QHtmlMenu::setActiveHtmlItem(internal_QHtmlMenuItem *item)
+void zcHtmlMenu::setActiveHtmlItem(internal_zcHtmlMenuItem *item)
 {
     if (item == nullptr) {
         setActiveAction(nullptr);
@@ -208,7 +229,7 @@ void QHtmlMenu::setActiveHtmlItem(internal_QHtmlMenuItem *item)
     }
 }
 
-bool QHtmlMenu::isActiveHtmlItem(internal_QHtmlMenuItem *item)
+bool zcHtmlMenu::isActiveHtmlItem(internal_zcHtmlMenuItem *item)
 {
     if (item == nullptr) {
         return false;
@@ -224,35 +245,35 @@ bool QHtmlMenu::isActiveHtmlItem(internal_QHtmlMenuItem *item)
 }
 
 
-void QHtmlMenu::htmlActionTriggered()
+void zcHtmlMenu::htmlActionTriggered()
 {
     QAction *current = qobject_cast<QAction *>(sender());
     _current_action = current;
 }
 
-void QHtmlMenu::htmlActionChanged()
+void zcHtmlMenu::htmlActionChanged()
 {
     QAction *current = qobject_cast<QAction *>(sender());
     if (_items.contains(current)) {
-        internal_QHtmlMenuItem *item = _items[current];
+        internal_zcHtmlMenuItem *item = _items[current];
         item->setHtml(current->text());
         item->setIcon(current->icon());
     }
 }
 
-int QHtmlMenu::version_major()
+int zcHtmlMenu::version_major()
 {
-    return QHTMLMENU_VERSION_MAJOR;
+    return zcHtmlMenu_VERSION_MAJOR;
 }
 
-int QHtmlMenu::version_minor()
+int zcHtmlMenu::version_minor()
 {
-    return QHTMLMENU_VERSION_MINOR;
+    return zcHtmlMenu_VERSION_MINOR;
 }
 
-QString QHtmlMenu::version()
+QString zcHtmlMenu::version()
 {
-    return QString("%1.%2").arg(QString::number(QHTMLMENU_VERSION_MAJOR),
-                                QString::number(QHTMLMENU_VERSION_MINOR)
+    return QString("%1.%2").arg(QString::number(zcHtmlMenu_VERSION_MAJOR),
+                                QString::number(zcHtmlMenu_VERSION_MINOR)
                                 );
 }

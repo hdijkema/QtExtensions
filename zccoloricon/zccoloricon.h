@@ -1,5 +1,5 @@
-﻿#ifndef LIBQTEXTENSIONS_GLOBAL_H
-#define LIBQTEXTENSIONS_GLOBAL_H
+﻿#ifndef ZCCANVASICON_H
+#define ZCCANVASICON_H
 /**
 
     This file is part of QtExtensions (https://github.com/hdijkema/QtExtensions).
@@ -21,16 +21,18 @@
 
 **/
 
-#include <QtCore/qglobal.h>
+#include <QIcon>
+#include "zccolor.h"
 
-#if defined(QTEXTENSIONSTEST)
-#  define LIBQTEXTENSIONS_EXPORT
-#else
-#  if defined(LIBQTEXTENSIONS_LIBRARY)
-#    define LIBQTEXTENSIONS_EXPORT Q_DECL_EXPORT
-#  else
-#    define LIBQTEXTENSIONS_EXPORT Q_DECL_IMPORT
-#  endif
-#endif
+class zcColorIcon : public QIcon
+{
+private:
+    typedef QIcon super;
 
-#endif // LIBQTEXTENSIONS_GLOBAL_H
+public:
+    zcColorIcon();
+    zcColorIcon(const zcColor & color, bool square = false);
+    zcColorIcon(char kind);
+};
+
+#endif // ZCCANVASICON_H
