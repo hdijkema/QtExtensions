@@ -8,15 +8,15 @@
 #include <QColor>
 #include "zccolor.h"
 
-#define zcpp_decl(type, op) \
-    type get(const QString &key, const type &dv) { return vget(key, dv).op(); } \
-    void set(const QString &key, const type &dv) { vset(key, dv); }
+#define zcpp_decl(type) \
+    type get(const QString &key, const type &dv); \
+    void set(const QString &key, const type &dv);
 
-#define zcpp_decl1(type, cvt_to, cvt_from) \
-    type get(const QString &key, const type &dv) { cvt_from(vget(key, cvt_to(dv))); } \
-    void set(const QString &key, const type &dv) { vset(key, cvt_to(dv)); }
-
+#ifdef Q_QDOC
 class zcPrefsProvider : public QObject
+#else
+class LIBQTEXTENSIONS_EXPORT zcPrefsProvider : public QObject
+#endif
 {
     Q_OBJECT
 public:
@@ -46,19 +46,18 @@ public:
     void del(const QString &key);
 
 public:
-    zcpp_decl(QString, toString)
-    zcpp_decl(int, toInt)
-    zcpp_decl(double, toDouble)
-    zcpp_decl(long long, toLongLong)
-    zcpp_decl(unsigned int, toUInt)
-    zcpp_decl(unsigned long long, toULongLong)
-    zcpp_decl(QDate, toDate)
-    zcpp_decl(QDateTime, toDateTime)
-    zcpp_decl1(QColor, [](QColor c) { zcColor f(c); return f.toHTML(); }, [](const QVariant &c){ return zcColor(c.toString()); })
-    zcpp_decl1(zcColor, [](zcColor c) { return c.toHTML(); }, [](const QVariant &c) { return zcColor(c.toString()); })
+    zcpp_decl(QString)
+    zcpp_decl(int)
+    zcpp_decl(double)
+    zcpp_decl(long long)
+    zcpp_decl(unsigned int)
+    zcpp_decl(unsigned long long)
+    zcpp_decl(QDate)
+    zcpp_decl(QDateTime)
+    zcpp_decl(QColor)
+    zcpp_decl(zcColor)
 };
 
 #undef zcpp_decl
-#undef zcpp_decl1
 
 #endif // ZCPREFSPROVIDER_H

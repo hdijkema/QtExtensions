@@ -13,5 +13,6 @@ contains(TEMPLATE, lib) {
   INCLUDEPATH += ../zccolorpicker
 }
 
-headers.files += $$PWD/zccolorpicker.h, $$PWD/zccolorpickeraction.h
+headers.files += $$PWD/zccolorpicker.h \
+    $$PWD/zccolorpickeraction.h
 

@@ -23,6 +23,9 @@
 
 #include "libqtextensions_global.h"
 
+#include <QString>
+#include <QList>
+
 class LIBQTEXTENSIONS_EXPORT QtExtensions
 {
 public:
@@ -30,6 +33,7 @@ public:
     QString license();
     QString licenseShort();
     QString author();
+    QStringList classes();
 };
 
 

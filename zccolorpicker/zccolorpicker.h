@@ -31,7 +31,11 @@
 #include "zcprefsprovider.h"
 #include "zccolorpickeraction.h"
 
+#ifdef Q_QDOC
 class zcColorPicker : public QFrame
+#else
+class LIBQTEXTENSIONS_EXPORT zcColorPicker : public QFrame
+#endif
 {
     Q_OBJECT
 private:

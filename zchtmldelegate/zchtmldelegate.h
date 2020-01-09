@@ -27,8 +27,11 @@
 
 #include "libqtextensions_global.h"
 
-
+#ifdef Q_QDOC
+class zcHtmlDelegate : public QStyledItemDelegate
+#else
 class LIBQTEXTENSIONS_EXPORT zcHtmlDelegate : public QStyledItemDelegate
+#endif
 {
     Q_OBJECT
 private:

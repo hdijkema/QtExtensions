@@ -23,11 +23,6 @@ public:
     }
 };
 
-void zcPrefsProvider::setFuncs(zcPrefsProvider::Funcs funcs)
-{
-    _funcs = funcs;
-}
-
 zcPrefsProvider::zcPrefsProvider(QObject *parent) :
     zcPrefsProvider(MyFuncs(), parent)
 {
@@ -42,6 +37,33 @@ zcPrefsProvider::zcPrefsProvider(zcPrefsProvider::Funcs funcs, QObject *parent)
 zcPrefsProvider::~zcPrefsProvider()
 {
 }
+
+void zcPrefsProvider::setFuncs(zcPrefsProvider::Funcs funcs)
+{
+    _funcs = funcs;
+}
+
+
+#define zcpp_decl(type, op) \
+    type zcPrefsProvider::get(const QString &key, const type &dv) { return vget(key, dv).op(); } \
+    void zcPrefsProvider::set(const QString &key, const type &dv) { vset(key, dv); }
+
+#define zcpp_decl1(type, cvt_to, cvt_from) \
+    type zcPrefsProvider::get(const QString &key, const type &dv) { return cvt_from(vget(key, cvt_to(dv))); } \
+    void zcPrefsProvider::set(const QString &key, const type &dv) { vset(key, cvt_to(dv)); }
+
+zcpp_decl(QString, toString)
+zcpp_decl(int, toInt)
+zcpp_decl(double, toDouble)
+zcpp_decl(long long, toLongLong)
+zcpp_decl(unsigned int, toUInt)
+zcpp_decl(unsigned long long, toULongLong)
+zcpp_decl(QDate, toDate)
+zcpp_decl(QDateTime, toDateTime)
+zcpp_decl1(QColor, [](QColor c) { zcColor f(c); return f.toHTML(); }, [](const QVariant &c){ return zcColor(c.toString()); })
+zcpp_decl1(zcColor, [](zcColor c) { return c.toHTML(); }, [](const QVariant &c) { return zcColor(c.toString()); })
+
+
 
 QVariant zcPrefsProvider::vget(const QString &key, const QVariant &default_value)
 {

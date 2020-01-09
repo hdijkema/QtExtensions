@@ -61,3 +61,15 @@ QString QtExtensions::author()
 {
     return QString("(c) %1 Hans Dijkema").arg(QTEXTENSIONS_DEVEL_YEARS);
 }
+
+QStringList QtExtensions::classes()
+{
+    QStringList l;
+
+    l << "zcBezier" << "zcColor" << "zcFont" << "zcPrefsProvider" << "zcPressPoint"
+      << "zcColorIcon" << "zcColorPicker" << "zcHtmlDelegate" << "zcHtmlMenu";
+
+    std::sort(l.begin(), l.end());
+
+    return l;
+}

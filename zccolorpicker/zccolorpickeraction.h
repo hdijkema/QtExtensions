@@ -7,7 +7,11 @@
 
 #include "zccolor.h"
 
+#ifdef Q_QDOC
 class zcColorPickerAction : public QWidgetAction
+#else
+class LIBQTEXTENSIONS_EXPORT zcColorPickerAction : public QWidgetAction
+#endif
 {
     Q_OBJECT
 public:

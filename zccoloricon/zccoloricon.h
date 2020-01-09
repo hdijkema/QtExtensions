@@ -24,7 +24,11 @@
 #include <QIcon>
 #include "zccolor.h"
 
+#ifdef Q_QDOC
 class zcColorIcon : public QIcon
+#else
+class LIBQTEXTENSIONS_EXPORT zcColorIcon : public QIcon
+#endif
 {
 private:
     typedef QIcon super;
