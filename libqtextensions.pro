@@ -1,10 +1,10 @@
 # Current library version
 QTEXTENSIONS_VERSION_MAJOR = 0
-QTEXTENSIONS_VERSION_MINOR = 2
+QTEXTENSIONS_VERSION_MINOR = 3
 QTEXTENSIONS_DEVEL_YEARS = "2020"
 
 # Install prefix
-unix: PREFIX=/usr/local
+mac: PREFIX=/Users/hans/devel/libraries/osx
 win32: PREFIX=c:/devel/libraries/win64
 
 # Sources are here
@@ -51,8 +51,6 @@ TRANSLATIONS += \
 PREFIX=$$PREFIX
 SRC_PREFIX=$$SRC_PREFIX
 
-unix: DOCTMP=/tmp/libqtextenstions_doc
-
 LIB_TARGET=lib
 CONFIG(debug, release|debug) {
 LIB_TARGET=libd
@@ -67,8 +65,8 @@ headers.path = $$PREFIX/include/qtextensions
 headers.files = libqtextensions.h libqtextensions_global.h
 
 #### Documentation
-documentation.files = doc/*
 documentation.path = $$PREFIX/doc/qtextensions
+win32: documentation.files = doc/*
 win32: documentation.extra = $$shell_path($$SRC_PREFIX\qtextensions_mkdoc.bat) \
           $$QTEXTENSIONS_VERSION_MAJOR $$QTEXTENSIONS_VERSION_MINOR \
           $$shell_path($$MYQMAKE) $$shell_path($$SRC_PREFIX) $$shell_path($$PREFIX/doc/qtextensions)

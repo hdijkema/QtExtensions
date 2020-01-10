@@ -1,6 +1,7 @@
 ﻿#include "testcolorlabel.h"
 #include "zchtmlmenu.h"
 #include "zccolorpicker.h"
+#include "zccoloricon.h"
 
 TestColorLabel::TestColorLabel(QWidget *parent) : QLabel(parent)
 {
@@ -15,6 +16,9 @@ void TestColorLabel::contextMenuEvent(QContextMenuEvent *)
 
     zcColorPickerAction *a2 = zcColorPicker::addColorPickerAction(menu, "Change color", true);
     connect(a2, &QAction::triggered, this, &TestColorLabel::setTextColor);
+
+    a3->setText("<b>HALLO!<b> <i><b>Yes!</b></i>");
+    a3->setIcon(zcColorIcon(zcColor("#00ff00")));
 
     QAction *a = menu->exec(QCursor::pos());
 

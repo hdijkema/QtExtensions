@@ -21,11 +21,11 @@
 
 #include "zchtmlmenu.h"
 
-#include <QWidgetAction>
 #include <QStyleOptionMenuItem>
 
 #include "zchtmlmenu.h"
 #include "zchtmlmenuitem.h"
+#include "zchtmlmenuaction.h"
 
 #define zcHtmlMenu_VERSION_MAJOR 0
 #define zcHtmlMenu_VERSION_MINOR 1
@@ -171,14 +171,14 @@ QAction *zcHtmlMenu::createHtmlAction(const QIcon &icon, const QString &html_lab
     item->setContentsMargins(hmargin, vmargin, hmargin, vmargin);
     item->setMinimumHeight(height);
 
-    QWidgetAction *wa = new QWidgetAction(this);
+    zcHtmlMenuAction *wa = new zcHtmlMenuAction(this);
     wa->setDefaultWidget(item);
 
-    wa->setIcon(icon);
-    wa->setText(html_label);
+    wa->setHtmlIcon(icon);
+    wa->setHtml(html_label);
 
     connect(wa, &QWidgetAction::triggered, this, &zcHtmlMenu::htmlActionTriggered);
-    connect(wa, &QAction::changed, this, &zcHtmlMenu::htmlActionChanged);
+    connect(wa, &zcHtmlMenuAction::htmlChanged, this, &zcHtmlMenu::htmlActionChanged);
 
     return wa;
 }
@@ -253,11 +253,11 @@ void zcHtmlMenu::htmlActionTriggered()
 
 void zcHtmlMenu::htmlActionChanged()
 {
-    QAction *current = qobject_cast<QAction *>(sender());
+    zcHtmlMenuAction *current = qobject_cast<zcHtmlMenuAction *>(sender());
     if (_items.contains(current)) {
         internal_zcHtmlMenuItem *item = _items[current];
-        item->setHtml(current->text());
-        item->setIcon(current->icon());
+        item->setHtml(current->html());
+        item->setIcon(current->htmlIcon());
     }
 }
 
