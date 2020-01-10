@@ -31,6 +31,19 @@
  *   \list
  *   \li zcHtmlMenu
  *   \li zcHtmlDelegate
+ *   \li zcColorIcon
+ *   \li zcColorPicker
+ *   \endlist
+ * \li base classes
+ *   \list
+ *   \li zcAtExit
+ *   \li zcBezier
+ *   \li zcColor
+ *   \li zcDir
+ *   \li zcFile
+ *   \li zcFont
+ *   \li zcPrefsProvider
+ *   \li zcPressPoint
  *   \endlist
  * \endlist
  */
@@ -66,10 +79,30 @@ QStringList QtExtensions::classes()
 {
     QStringList l;
 
-    l << "zcBezier" << "zcColor" << "zcFont" << "zcPrefsProvider" << "zcPressPoint"
-      << "zcColorIcon" << "zcColorPicker" << "zcHtmlDelegate" << "zcHtmlMenu";
+    l << "#basictypes - basic types of the QtExtensions library";
+    l << "zcAtExit" <<
+         "zcBezier" <<
+         "zcColor" <<
+         "zcdebug.h" <<
+         "zcFont" <<
+         "zcDir" <<
+         "zcFile" <<
+         "zcFont" <<
+         "zclib_defaults.h" <<
+         "zcPrefsProvider" <<
+         "zcPressPoint";
 
-    std::sort(l.begin(), l.end());
+    l << "#zccoloricon - an icon that displays a color (round or square)";
+    l << "zcColorIcon";
+
+    l << "#zccolorpicker - a color picker widget and action for QMenu";
+    l << "zcColorPicker" << "zcColorPickerAction";
+
+    l << "#zchtmldelegate - an HTML enabled delegate for QTableView / QListView";
+    l << "zcHtmlDelegate";
+
+    l << "#zchtmlmenu - an HTML enabled QMenu derivate";
+    l << "zcHtmlMenu";
 
     return l;
 }
