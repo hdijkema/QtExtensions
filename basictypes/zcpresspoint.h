@@ -28,7 +28,12 @@
 
 #include "libqtextensions_global.h"
 
-class LIBQTEXTENSIONS_EXPORT zcPressPoint : public QPointF {
+#ifdef Q_QDOC
+class zcPressPoint : public QPointF
+#else
+class LIBQTEXTENSIONS_EXPORT zcPressPoint : public QPointF
+#endif
+{
 
 private:
     qreal       _pressure;

@@ -30,7 +30,12 @@
 #include "zcpresspoint.h"
 #include "libqtextensions_global.h"
 
-class LIBQTEXTENSIONS_EXPORT zcBezier {
+#ifdef Q_QDOC
+class zcBezier
+#else
+class LIBQTEXTENSIONS_EXPORT zcBezier
+#endif
+{
 
 private:
     QPointF _start;

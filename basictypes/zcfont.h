@@ -21,13 +21,17 @@
 
 **/
 
+#include "libqtextensions_global.h"
 #include <QFont>
 #include <QJsonObject>
 #include <QDataStream>
 
-#include "libqtextensions_global.h"
 
+#ifdef Q_QDOC
+class zcFont : public QFont
+#else
 class LIBQTEXTENSIONS_EXPORT zcFont : public QFont
+#endif
 {
 private:
     typedef QFont super;

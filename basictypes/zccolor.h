@@ -27,7 +27,11 @@
 
 #include "libqtextensions_global.h"
 
+#ifdef Q_QDOC
+class zcColor : public QColor
+#else
 class LIBQTEXTENSIONS_EXPORT zcColor : public QColor
+#endif
 {
 private:
     typedef QColor super;

@@ -125,8 +125,13 @@ QJsonObject zcColor::toJson() const {
     return obj;
 }
 
+void zcColor::fromJson(const QJsonObject & obj) {
+    if (obj.contains("rgba")) {
+        this->setRgba(static_cast<QRgb>(obj["rgba"].toInt()));
+    }
+}
 
-QDataStream & operator << (QDataStream & out, const zcColor & col) {
+LIBQTEXTENSIONS_EXPORT QDataStream & operator << (QDataStream & out, const zcColor & col) {
     out << ZCCOLOR_MAGIC(1);
     QRgb rgba = col.rgba();
     qint32 c = static_cast<qint32>(rgba);
@@ -134,11 +139,11 @@ QDataStream & operator << (QDataStream & out, const zcColor & col) {
     return out;
 }
 
-QDataStream & operator << (QDataStream & out, const zcColor * col) {
+LIBQTEXTENSIONS_EXPORT QDataStream & operator << (QDataStream & out, const zcColor * col) {
     return operator <<(out, *col);
 }
 
-QDataStream & operator >> (QDataStream & in, zcColor & col) {
+LIBQTEXTENSIONS_EXPORT QDataStream & operator >> (QDataStream & in, zcColor & col) {
     MAGIC_ASSERT(in, ZCCOLOR_TYPE, 1);
     qint32 c;
     in >> c;
@@ -146,15 +151,11 @@ QDataStream & operator >> (QDataStream & in, zcColor & col) {
     return in;
 }
 
-QDataStream & operator >> (QDataStream & in, zcColor * col) {
+LIBQTEXTENSIONS_EXPORT QDataStream & operator >> (QDataStream & in, zcColor * col) {
     return operator >>(in, *col);
 }
 
 
-void zcColor::fromJson(const QJsonObject & obj) {
-    if (obj.contains("rgba")) {
-        this->setRgba(static_cast<QRgb>(obj["rgba"].toInt()));
-    }
-}
+
 
 

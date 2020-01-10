@@ -22,7 +22,7 @@
 #include <QtMath>
 #include "zclib_defaults.h"
 
-QDebug & operator<<(QDebug & d, const zcBezier & input)
+LIBQTEXTENSIONS_EXPORT QDebug & operator<<(QDebug & d, const zcBezier & input)
 {
     d << "start:" << input._start << "," << input._startPressure
       << ", c1:" << input._control1 << ", c2:" << input._control2

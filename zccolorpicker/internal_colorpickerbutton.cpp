@@ -13,8 +13,8 @@ internal_ColorPickerButton::internal_ColorPickerButton(const zcColor &color, con
     btn->setProperty("kleur", vcol);
     btn->setToolTip(tooltip);
     QString linecol = zcColor(color.darker()).toHTML();
-    btn->setStyleSheet(QString("QLabel { border:none;background-color:%1;margin:2px;padding:0; } "
-                               "QLabel:hover { border:1px solid %2; }").arg(
+    btn->setStyleSheet(QString("QLabel { border:none;background-color:%1;margin:4px;padding:2px; } "
+                               "QLabel:hover { border:2px solid %2; }").arg(
                            vcol, linecol
                            )
                        );
@@ -26,8 +26,8 @@ internal_ColorPickerButton::internal_ColorPickerButton(const QString &text, QWid
 {
     QColor c = Qt::black;
     QString linecol = zcColor(c).toHTML();
-    setStyleSheet(QString("QLabel { border:none;margin:2px;padding:0; } "
-                                   "QLabel:hover { border:1px solid %1; }").arg(
+    setStyleSheet(QString("QLabel { border:none;margin:4px;padding:2px; } "
+                                   "QLabel:hover { border:2px solid %1; }").arg(
                                linecol
                                )
                            );

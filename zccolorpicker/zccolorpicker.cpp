@@ -130,7 +130,7 @@ zcColorPicker::zcColorPicker(bool withColorDlg, QWidget *parent)
     _my_action = nullptr;
 }
 
-void zcColorPicker::internalColorChoosen(const zcColor &c)
+void zcColorPicker::internalColorChoosen(const zcColor &c, bool trigger)
 {
     QString kleur = c.toHTML();
     _prefs.set("colorpicker.lastcolor", kleur);
@@ -138,8 +138,7 @@ void zcColorPicker::internalColorChoosen(const zcColor &c)
     _choosen = true;
     if (_my_action != nullptr) {
         _my_action->setProperty("color", kleur);
-        _my_action->trigger();
-        //_my_action->triggered();
+        if (trigger) _my_action->trigger();
     }
     emit colorChoosen(zcColor(_color_choosen));
 }
@@ -155,7 +154,7 @@ void zcColorPicker::colorChoosenSlot()
     if (btn != nullptr) {
         QString kleur = btn->property("kleur").toString();
         zcColor c(kleur);
-        internalColorChoosen(c);
+        internalColorChoosen(c, false);
     }
 }
 
@@ -167,7 +166,7 @@ void zcColorPicker::colorDialog()
     QColorDialog *dlg = new QColorDialog(lc, this);
     if (dlg->exec() == QDialog::Accepted) {
         zcColor c(dlg->selectedColor());
-        internalColorChoosen(c);
+        internalColorChoosen(c, true);
     }
     dlg->deleteLater();
 }

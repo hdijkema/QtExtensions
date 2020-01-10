@@ -68,7 +68,7 @@ signals:
     void colorChoosen(const zcColor &color);
 
 private:
-    void internalColorChoosen(const zcColor &c);
+    void internalColorChoosen(const zcColor &c, bool trigger);
 
     // QWidget interface
 protected:
