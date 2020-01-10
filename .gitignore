@@ -30,4 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Specific stuff
 build-qtextensionstest*
+libqtextensions.pro.user
