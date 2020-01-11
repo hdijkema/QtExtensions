@@ -1,4 +1,4 @@
-#include "zchtmlmenuaction.h"
+﻿#include "zchtmlmenuaction.h"
 #include "zchtmlmenuiconengine.h"
 
 static QChar *_my_string = nullptr;
@@ -21,6 +21,7 @@ zcHtmlMenuAction::zcHtmlMenuAction(const QIcon &icon, const QString &html, QWidg
 
     if (_my_string == nullptr) {
         _my_string = new QChar[1];
+        _my_string[0] = QChar(' ');
     }
 
     _empty_icon = QIcon(new zcHtmlMenuIconEngine());

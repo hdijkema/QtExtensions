@@ -1,9 +1,3 @@
-# Current library version
-# If you change these variables, you need to rebuild at least libqtextensions.cpp
-QTEXTENSIONS_VERSION_MAJOR = 0
-QTEXTENSIONS_VERSION_MINOR = 3
-QTEXTENSIONS_DEVEL_YEARS = "2020"
-
 # Install prefix
 mac: PREFIX=/Users/hans/devel/libraries/osx
 win32: PREFIX=c:/devel/libraries/win64
@@ -15,10 +9,7 @@ unix:SRC_PREFIX=../qtextensions
 QT += core gui widgets
 
 TEMPLATE = lib
-DEFINES += LIBQTEXTENSIONS_LIBRARY \
-    QTEXTENSIONS_VERSION_MAJOR=$$QTEXTENSIONS_VERSION_MAJOR \
-    QTEXTENSIONS_VERSION_MINOR=$$QTEXTENSIONS_VERSION_MINOR \
-    QTEXTENSIONS_DEVEL_YEARS=$$QTEXTENSIONS_DEVEL_YEARS
+DEFINES += LIBQTEXTENSIONS_LIBRARY
 
 CONFIG += c++11
 
@@ -66,6 +57,27 @@ headers.path = $$PREFIX/include/qtextensions
 headers.files = libqtextensions.h libqtextensions_global.h
 
 #### Documentation
+win32: QTEXTENSIONS_VERSION_MAJOR = $$system(findstr /C:QTEXTENSIONS_VERSION_MAJOR libqtextensions.h)
+mac: QTEXTENSIONS_VERSION_MAJOR=$$system(grep QTEXTENSIONS_VERSION_MAJOR libqtextensions.h)
+linux: QTEXTENSIONS_VERSION_MAJOR=$$system(grep QTEXTENSIONS_VERSION_MAJOR libqtextensions.h)
+
+QTEXTENSIONS_VERSION_MAJOR = $$replace(QTEXTENSIONS_VERSION_MAJOR, define, )
+QTEXTENSIONS_VERSION_MAJOR = $$replace(QTEXTENSIONS_VERSION_MAJOR, QTEXTENSIONS_VERSION_MAJOR, )
+QTEXTENSIONS_VERSION_MAJOR = $$replace(QTEXTENSIONS_VERSION_MAJOR, $$LITERAL_HASH, )
+QTEXTENSIONS_VERSION_MAJOR = $$QTEXTENSIONS_VERSION_MAJOR
+
+win32: QTEXTENSIONS_VERSION_MINOR = $$system(findstr /C:QTEXTENSIONS_VERSION_MINOR libqtextensions.h)
+mac: QTEXTENSIONS_VERSION_MINOR=$$system(grep QTEXTENSIONS_VERSION_MINOR libqtextensions.h)
+linux: QTEXTENSIONS_VERSION_MINOR=$$system(grep QTEXTENSIONS_VERSION_MINOR libqtextensions.h)
+
+QTEXTENSIONS_VERSION_MINOR = $$replace(QTEXTENSIONS_VERSION_MINOR, define, )
+QTEXTENSIONS_VERSION_MINOR = $$replace(QTEXTENSIONS_VERSION_MINOR, QTEXTENSIONS_VERSION_MINOR, )
+QTEXTENSIONS_VERSION_MINOR = $$replace(QTEXTENSIONS_VERSION_MINOR, $$LITERAL_HASH, )
+QTEXTENSIONS_VERSION_MINOR = $$QTEXTENSIONS_VERSION_MINOR
+
+message(version: $$QTEXTENSIONS_VERSION_MAJOR $$QTEXTENSIONS_VERSION_MINOR)
+
+
 documentation.path = $$PREFIX/doc/qtextensions
 win32: documentation.files = doc/*
 win32: documentation.extra = $$shell_path($$SRC_PREFIX\qtextensions_mkdoc.bat) \
