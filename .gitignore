@@ -34,3 +34,4 @@
 # Specific stuff
 build-qtextensionstest*
 libqtextensions.pro.user
+/libqtextensions.pro.user

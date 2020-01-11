@@ -1,4 +1,5 @@
 # Current library version
+# If you change these variables, you need to rebuild at least libqtextensions.cpp
 QTEXTENSIONS_VERSION_MAJOR = 0
 QTEXTENSIONS_VERSION_MINOR = 3
 QTEXTENSIONS_DEVEL_YEARS = "2020"
