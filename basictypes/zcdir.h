@@ -23,6 +23,7 @@
 
 #include "libqtextensions_global.h"
 #include <QDir>
+#include <functional>
 
 #ifdef Q_QDOC
 class zcDir : public QDir
@@ -81,6 +82,14 @@ public:
      * @return
      */
     bool openInFileManager();
+
+public:
+    /**
+      * @brief maps function f for al files in this directory, recursively.
+      * f is called with a full absolute path to the file to be processed.
+      * @return returns true if all files have been processed.
+      */
+    bool mapRecurse(std::function<bool (QFile &, int count, int total)> f);
 };
 
 #endif // ZCDIR_H

@@ -20,6 +20,8 @@
 **/
 
 #include "zcdir.h"
+#include "zcfile.h"
+
 #include <QProcessEnvironment>
 #ifndef ZC4CRYPT
 #include <QDesktopServices>
@@ -121,6 +123,47 @@ bool zcDir::openInFileManager()
     return success;
     */
 #endif
+}
+
+static bool mapRecurseInternal(zcDir &d, std::function<bool (QFile &)> f)
+{
+    QStringList entries = d.entryList(QDir::Files);
+    zcDir base(d);
+
+    int i, N;
+    for(i = 0, N = entries.size(); i < N; i++) {
+        zcFile file(base, entries[i]);
+        bool ok = f(file);
+        if (!ok) { return false; }
+    }
+
+    entries = d.entryList(QDir::AllDirs|QDir::NoDotAndDotDot);
+    for(i = 0, N = entries.size(); i < N; i++) {
+        zcDir next_dir(base, entries[i]);
+        bool ok = mapRecurseInternal(next_dir, f);
+        if (!ok) { return false; }
+    }
+
+    return true;
+}
+
+bool zcDir::mapRecurse(std::function<bool (QFile &, int index, int total)> f)
+{
+    int count = 0;
+
+    auto counter = [&count](QFile &) {
+        count += 1;
+        return true;
+    };
+
+    mapRecurseInternal(*this, counter);
+
+    int index = 0;
+    auto mapper = [&index, count, f](QFile &file) {
+        return f(file, index, count);
+    };
+
+    return mapRecurseInternal(*this, mapper);
 }
 
 /*

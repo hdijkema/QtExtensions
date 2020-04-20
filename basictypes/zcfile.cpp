@@ -36,13 +36,20 @@
 
 #define CHUNK 16384
 
+static QString removePrefixSlash(QString s)
+{
+    while (s.startsWith("/") || s.startsWith("\\")) {
+        s = s.mid(1);
+    }
+    return s;
+}
 
 zcFile::zcFile()
 {
 }
 
 zcFile::zcFile(const QDir &dir, const QString &filename) :
-    QFile(dir.absoluteFilePath(filename))
+    QFile(dir.absoluteFilePath(removePrefixSlash(filename)))
 {
 }
 
