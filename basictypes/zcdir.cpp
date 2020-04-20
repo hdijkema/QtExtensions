@@ -160,6 +160,7 @@ bool zcDir::mapRecurse(std::function<bool (QFile &, int index, int total)> f)
 
     int index = 0;
     auto mapper = [&index, count, f](QFile &file) {
+        index += 1;
         return f(file, index, count);
     };
 
