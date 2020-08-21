@@ -1,10 +1,12 @@
 # Install prefix
 mac: PREFIX=/Users/hans/devel/libraries/osx
 win32: PREFIX=c:/devel/libraries/win64
+linux: PREFIX=/home/hans/devel/libraries/linux64
 
 # Sources are here
 win32:SRC_PREFIX=../qtextensions
 unix:SRC_PREFIX=../qtextensions
+linux:SRC_PREFIX=../qtextensions
 
 QT += core gui widgets
 
