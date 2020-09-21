@@ -30,6 +30,8 @@
 #include "zchtmlmenu.h"
 #include "zchtmlmenuitemlabel.h"
 
+#include <QDebug>
+
 
 internal_zcHtmlMenuItem::internal_zcHtmlMenuItem(zcHtmlMenu *parent)
     : internal_zcHtmlMenuItem("", parent)
@@ -59,6 +61,11 @@ internal_zcHtmlMenuItem::internal_zcHtmlMenuItem(const QIcon &icn, const QString
     setHtml(html_label);
 }
 
+internal_zcHtmlMenuItem::~internal_zcHtmlMenuItem()
+{
+    _my_menu = nullptr;
+}
+
 void internal_zcHtmlMenuItem::setHtml(const QString &html_label)
 {
     _label->setText(html_label);
@@ -76,14 +83,22 @@ void internal_zcHtmlMenuItem::setIcon(const QIcon &icn)
 
 void internal_zcHtmlMenuItem::enterEvent(QEvent *)
 {
-    _my_menu->setActiveHtmlItem(this);
-    update();
+    if (_my_menu != nullptr) {
+        _my_menu->setActiveHtmlItem(this);
+        update();
+    } else {
+        qDebug() << "Unexpected! _my_menu == nullptr!";
+    }
 }
 
 void internal_zcHtmlMenuItem::leaveEvent(QEvent *)
 {
-    _my_menu->setActiveHtmlItem(nullptr);
-    update();
+    if (_my_menu != nullptr) {
+        _my_menu->setActiveHtmlItem(nullptr);
+        update();
+    } else {
+        qDebug() << "Unexpected! _my_menu == nullptr!";
+    }
 }
 
 void internal_zcHtmlMenuItem::mouseReleaseEvent(QMouseEvent *event)
