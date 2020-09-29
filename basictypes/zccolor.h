@@ -38,10 +38,12 @@ private:
     bool _invalid;
 
 public:
-    explicit zcColor(const QColor & col);
+    explicit zcColor(QColor col);
+    //explicit zcColor(const QColor & col);
     explicit zcColor(int color = Qt::black);
     explicit zcColor(int r, int g, int b, int a = 255);
     explicit zcColor(const char *htmlColor);
+    explicit zcColor(QString htmlColor);
 
 public:
     static zcColor fromHTML(const QString & htmlColor);

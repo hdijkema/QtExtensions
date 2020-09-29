@@ -23,9 +23,14 @@
 #include "zclib_defaults.h"
 #include <stdlib.h>
 
-zcColor::zcColor(const QColor &col) : QColor(col) {
+zcColor::zcColor(QColor col) : QColor(col )
+{
     _invalid = false;
 }
+
+/*zcColor::zcColor(const QColor &col) : QColor(col) {
+    _invalid = false;
+}*/
 
 zcColor::zcColor(int color) : QColor(static_cast<QRgb>(color)) {
     _invalid = false;
@@ -37,6 +42,11 @@ zcColor::zcColor(int r, int g, int b, int a) : QColor(r, g, b, a)
 }
 
 zcColor::zcColor(const char *htmlColor) : QColor(zcColor::fromHTML(htmlColor))
+{
+    _invalid = false;
+}
+
+zcColor::zcColor(QString htmlColor) : QColor(zcColor::fromHTML(htmlColor))
 {
     _invalid = false;
 }
