@@ -69,10 +69,10 @@ public:
     void fromJson(const QJsonObject & obj);
 
 public:
-    zcColor & operator =(const QColor & c) {
-        super::operator =(c);
-        return *this;
-    }
+    QColor qcolor() const;
+
+public:
+    zcColor & operator =(QColor c);
 
 };
 

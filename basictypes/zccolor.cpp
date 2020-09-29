@@ -137,6 +137,17 @@ void zcColor::fromJson(const QJsonObject & obj) {
     }
 }
 
+QColor zcColor::qcolor() const
+{
+    return *this;
+}
+
+zcColor &zcColor::operator =(QColor c)
+{
+    super::operator =(c);
+    return *this;
+}
+
 LIBQTEXTENSIONS_EXPORT QDataStream & operator << (QDataStream & out, const zcColor & col) {
     out << ZCCOLOR_MAGIC(1);
     QRgb rgba = col.rgba();

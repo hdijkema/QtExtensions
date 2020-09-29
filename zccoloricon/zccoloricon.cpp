@@ -29,6 +29,11 @@ zcColorIcon::zcColorIcon()
 }
 
 zcColorIcon::zcColorIcon(const zcColor &color, bool square)
+    : zcColorIcon(color.qcolor(), square)
+{
+}
+
+zcColorIcon::zcColorIcon(const QColor &color, bool square)
 {
     int i, N, sz = 256;
     for(i = 0, N = 1 ; i < N; i++, sz *= 2) {

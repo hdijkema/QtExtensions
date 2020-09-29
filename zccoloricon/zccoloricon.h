@@ -36,6 +36,7 @@ private:
 public:
     zcColorIcon();
     zcColorIcon(const zcColor & color, bool square = false);
+    zcColorIcon(const QColor & color, bool square = false);
     zcColorIcon(char kind);
 };
 
