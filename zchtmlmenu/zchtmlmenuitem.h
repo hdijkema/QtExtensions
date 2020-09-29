@@ -42,6 +42,9 @@ public:
     internal_zcHtmlMenuItem(const QIcon &icn, const QString &html_label, zcHtmlMenu *parent);
 
 public:
+    ~internal_zcHtmlMenuItem();
+
+public:
     void setHtml(const QString &html);
     void setIcon(const QIcon &icon);
 
