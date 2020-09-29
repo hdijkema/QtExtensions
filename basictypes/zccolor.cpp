@@ -28,10 +28,6 @@ zcColor::zcColor(QColor col) : QColor(col )
     _invalid = false;
 }
 
-/*zcColor::zcColor(const QColor &col) : QColor(col) {
-    _invalid = false;
-}*/
-
 zcColor::zcColor(int color) : QColor(static_cast<QRgb>(color)) {
     _invalid = false;
 }
