@@ -51,7 +51,7 @@ public:
 public:
     static void atexit(const char *func, zcAtExitFunc f, bool report_before = true, bool report_after = true);
     static void atexitLast(const char *func, zcAtExitFunc f, bool report_before = true, bool report_after = true);
-
+    static void setApplication(QCoreApplication *app);
 public slots:
     void runAtExits();
 };

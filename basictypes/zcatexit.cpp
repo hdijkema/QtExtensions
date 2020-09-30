@@ -62,8 +62,7 @@ zcAtExit::zcAtExit(QCoreApplication *app) : QObject(app)
         exit(1);
     } else {
         _at_exit = this;
-        _app = app;
-        connect(app, &QCoreApplication::aboutToQuit, this, &zcAtExit::runAtExits);
+        zcAtExit::setApplication(app);
     }
 }
 
@@ -72,20 +71,39 @@ zcAtExit::~zcAtExit()
     LINE_DEBUG;
     disconnect(_app, &QCoreApplication::aboutToQuit, this, &zcAtExit::runAtExits);
     _at_exit = nullptr;
+}
 
+void zcAtExit::setApplication(QCoreApplication *app)
+{
+    if (_at_exit == nullptr) {
+        _at_exit = new zcAtExit(app);
+    } else {
+        if (app == nullptr) {
+            LINE_CRITICAL << "setApplication() called with nullptr app!";
+        } else {
+            _at_exit->_app = app;
+            _at_exit->setParent(app);
+            if (app != nullptr) {
+                connect(app, &QCoreApplication::aboutToQuit, _at_exit, &zcAtExit::runAtExits);
+            } else {
+                LINE_WARNING << "app == nullptr!";
+            }
+        }
+    }
 }
 
 void zcAtExit::atexit(const char *func, zcAtExitFunc f, bool report_before, bool report_after)
 {
     if (_at_exit == nullptr) {
-        LINE_CRITICAL << "Instantiate zcAtExit() first!";
-        exit(1);
-    } else {
-        _at_exit->_handlers.append(f);
-        _at_exit->_funcs.append(func);
-        _at_exit->_report.append(report_before);
-        _at_exit->_report_after.append(report_after);
+        _at_exit = new zcAtExit(nullptr);
+        LINE_WARNING << "Instantiation of zcAtExit() without QApplication!";
+        LINE_WARNING << "Make sure you set the application later on!";
     }
+
+    _at_exit->_handlers.append(f);
+    _at_exit->_funcs.append(func);
+    _at_exit->_report.append(report_before);
+    _at_exit->_report_after.append(report_after);
 }
 
 void zcAtExit::atexitLast(const char *func, zcAtExitFunc f, bool report_before, bool report_after)
