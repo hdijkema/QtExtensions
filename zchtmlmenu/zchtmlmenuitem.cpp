@@ -9,7 +9,7 @@
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    Qtextensions is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
@@ -75,13 +75,17 @@ void internal_zcHtmlMenuItem::setIcon(const QIcon &icn)
 {
     QStyle *style = _my_menu->style();
     QStyleOption opt;
-    opt.init(this);
+    opt.initFrom(this);
     int icone = style->pixelMetric(QStyle::PM_SmallIconSize, &opt, this);
 
     _l_icon->setPixmap(icn.pixmap(QSize(icone, icone)));
 }
 
+#ifdef QT6
+void internal_zcHtmlMenuItem::enterEvent(QEnterEvent *)
+#else
 void internal_zcHtmlMenuItem::enterEvent(QEvent *)
+#endif
 {
     if (_my_menu != nullptr) {
         _my_menu->setActiveHtmlItem(this);

@@ -19,8 +19,19 @@ void zcHtmlMenuIconEngine::virtual_hook(int id, void *data)
     if (id == QIconEngine::IsNullHook) {
         bool *b = reinterpret_cast<bool *>(data);
         *b = true;
-    } else if (id == QIconEngine::IconNameHook) {
+    }
+#ifndef QT6
+    else if (id == QIconEngine::IconNameHook) {
         QString *name = reinterpret_cast<QString *>(data);
         *name = "zcHtmlMenuIcon";
     }
+#endif
 }
+
+#ifdef QT6
+QString zcHtmlMenuIconEngine::iconName()
+{
+    return "zcHtmlMenuIcon";
+}
+#endif
+

@@ -9,7 +9,7 @@
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    Qtextensions is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include <QRegularExpression>
 
 #if defined(MSDOS) || defined(OS2) || defined(WIN32) || defined(__CYGWIN__)
 #  include <fcntl.h>
@@ -70,7 +71,11 @@ zcFile::zcFile(const zcFile &f)
 
 QString zcFile::canonical(QString fn)
 {
+#ifdef QT6
+    QRegularExpression re("[^a-zA-Z0-9-_]");
+#else
     QRegExp re("[^a-zA-Z0-9-_]");
+#endif
     fn.replace(re, "_");
     return fn;
 }

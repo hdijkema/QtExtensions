@@ -10,6 +10,12 @@ linux:SRC_PREFIX=../qtextensions
 
 QT += core gui widgets
 
+# QT6 Support
+equals(QT_MAJOR_VERSION, 6) {
+win32: TARGET = libqtextensions_qt6
+mac: TARGET = liblibqtextensions_qt6
+}
+
 TEMPLATE = lib
 DEFINES += LIBQTEXTENSIONS_LIBRARY
 

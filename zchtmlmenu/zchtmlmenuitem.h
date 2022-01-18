@@ -11,7 +11,7 @@
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    Qtextensions is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
@@ -26,6 +26,12 @@
 #include <QLabel>
 #include <QIcon>
 
+#ifndef QT6
+#  if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+#    define QT6
+#  endif
+#endif
+
 class zcHtmlMenu;
 
 class internal_zcHtmlMenuItem : public QWidget
@@ -37,7 +43,7 @@ private:
     QLabel       *_l_icon;
 
 public:
-    internal_zcHtmlMenuItem(zcHtmlMenu *parent);
+    explicit internal_zcHtmlMenuItem(zcHtmlMenu *parent);
     internal_zcHtmlMenuItem(const QString &html_label, zcHtmlMenu *parent);
     internal_zcHtmlMenuItem(const QIcon &icn, const QString &html_label, zcHtmlMenu *parent);
 
@@ -50,7 +56,11 @@ public:
 
     // QWidget interface
 protected:
+#ifdef QT6
+    void enterEvent(QEnterEvent *event) override;
+#else
     void enterEvent(QEvent *event) override;
+#endif
     void leaveEvent(QEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
 

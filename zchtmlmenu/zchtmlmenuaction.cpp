@@ -1,6 +1,8 @@
 ﻿#include "zchtmlmenuaction.h"
 #include "zchtmlmenuiconengine.h"
 
+#include <QWidget>
+
 static QChar *_my_string = nullptr;
 
 zcHtmlMenuAction::zcHtmlMenuAction(QWidget *parent)
@@ -14,17 +16,14 @@ zcHtmlMenuAction::zcHtmlMenuAction(const QString &html, QWidget *parent)
 }
 
 zcHtmlMenuAction::zcHtmlMenuAction(const QIcon &icon, const QString &html, QWidget *parent)
-    : QWidgetAction(parent)
+    : QWidgetAction(parent), _html_icon(icon), _html(html)
 {
-    _html_icon = icon;
-    _html = html;
-
     if (_my_string == nullptr) {
         _my_string = new QChar[1];
         _my_string[0] = QChar(' ');
     }
 
-    _empty_icon = QIcon(new zcHtmlMenuIconEngine());
+    _empty_icon = QIcon();
     _empty_string.setRawData(_my_string, 1);
 
     setIcon(_empty_icon);

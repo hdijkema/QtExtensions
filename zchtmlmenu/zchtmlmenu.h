@@ -11,7 +11,7 @@
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    Qtextensions is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
@@ -38,7 +38,7 @@ class LIBQTEXTENSIONS_EXPORT zcHtmlMenu : public QMenu
     Q_OBJECT
 private:
     QHash<QWidget *, QAction *>                  _actions;
-    QHash<QAction *, internal_zcHtmlMenuItem *>   _items;
+    QHash<QAction *, internal_zcHtmlMenuItem *>  _items;
     QAction                                     *_current_action;
     int                                          _action_h_margin;
     int                                          _action_v_margin;
@@ -46,7 +46,7 @@ private:
     int                                          _text_height;
 
 public:
-    zcHtmlMenu(const QString &title, QWidget *parent = nullptr);
+    explicit zcHtmlMenu(const QString &title, QWidget *parent = nullptr);
     zcHtmlMenu(QWidget *parent = nullptr);
 
 public:

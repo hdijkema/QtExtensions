@@ -9,7 +9,7 @@
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    Qtextensions is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
@@ -86,7 +86,7 @@ zcHtmlMenu::zcHtmlMenu(const QString &title, QWidget *parent)
 
     QStyle *style = this->style();
     QStyleOption opt;
-    opt.init(this);
+    opt.initFrom(this);
     int hmargin = style->pixelMetric(QStyle::PM_MenuHMargin, &opt, this);
     int vmargin = style->pixelMetric(QStyle::PM_MenuVMargin, &opt, this);
     int icone = style->pixelMetric(QStyle::PM_SmallIconSize, &opt, this);

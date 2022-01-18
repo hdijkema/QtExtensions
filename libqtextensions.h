@@ -11,7 +11,7 @@
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    QtExtensions is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
@@ -24,8 +24,8 @@
 // Current library version
 // If you change these variables, you need to rebuild at least libqtextensions.cpp
 #define QTEXTENSIONS_VERSION_MAJOR 0
-#define QTEXTENSIONS_VERSION_MINOR 33
-#define QTEXTENSIONS_DEVEL_YEARS   "2020"
+#define QTEXTENSIONS_VERSION_MINOR 34
+#define QTEXTENSIONS_DEVEL_YEARS   "2020, 2021"
 
 #include "libqtextensions_global.h"
 

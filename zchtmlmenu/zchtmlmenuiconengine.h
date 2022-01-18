@@ -3,6 +3,12 @@
 
 #include <QIconEngine>
 
+#ifndef QT6
+#  if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+#    define QT6
+#  endif
+#endif
+
 class zcHtmlMenuIconEngine : public QIconEngine
 {
 public:
@@ -10,9 +16,15 @@ public:
 
     // QIconEngine interface
 public:
-    void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state);
-    QIconEngine *clone() const;
-    void virtual_hook(int id, void *data);
+    virtual void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state) override;
+    virtual QIconEngine *clone() const override;
+    virtual void virtual_hook(int id, void *data) override;
+
+#ifdef QT6
+    // QIconEngine interface
+public:
+    virtual QString iconName() override;
+#endif
 };
 
 #endif // ZCHTMLMENUICONENGINE_H

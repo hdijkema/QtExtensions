@@ -11,7 +11,7 @@
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    QtExtensions is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
@@ -30,6 +30,12 @@
 #    define LIBQTEXTENSIONS_EXPORT Q_DECL_EXPORT
 #  else
 #    define LIBQTEXTENSIONS_EXPORT Q_DECL_IMPORT
+#  endif
+#endif
+
+#ifndef QT6
+#  if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+#    define QT6
 #  endif
 #endif
 
