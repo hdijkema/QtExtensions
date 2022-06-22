@@ -24,8 +24,8 @@
 // Current library version
 // If you change these variables, you need to rebuild at least libqtextensions.cpp
 #define QTEXTENSIONS_VERSION_MAJOR 0
-#define QTEXTENSIONS_VERSION_MINOR 34
-#define QTEXTENSIONS_DEVEL_YEARS   "2020, 2021"
+#define QTEXTENSIONS_VERSION_MINOR 35
+#define QTEXTENSIONS_DEVEL_YEARS   "2020, 2021, 2022"
 
 #include "libqtextensions_global.h"
 

@@ -53,6 +53,20 @@ zcDir::zcDir(const QDir &dir, const QString &subdir) : QDir(dir.absoluteFilePath
     _valid = true;
 }
 
+zcDir &zcDir::operator =(const zcDir &d)
+{
+    _valid = d._valid;
+    QDir::operator =(d);
+    return *this;
+}
+
+zcDir &zcDir::operator =(const QDir &d)
+{
+    _valid = true;
+    QDir::operator =(d);
+    return *this;
+}
+
 bool zcDir::mkpath()
 {
     return super::mkpath(super::absolutePath());

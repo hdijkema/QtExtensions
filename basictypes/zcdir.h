@@ -44,6 +44,10 @@ public:
     zcDir(const QDir & dir, const QString & subdir);
 
 public:
+    zcDir &operator =(const zcDir &d);
+    zcDir &operator =(const QDir &d);
+
+public:
     /**
      * @brief The application can set this value to true or false.
      * Defaults to true.
