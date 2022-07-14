@@ -131,6 +131,75 @@ zcFile zcFile::findBasename(const QString &name, QDir basedir, bool recursive, b
     }
 }
 
+#define BUFSIZE 16384
+#define MAX_BUFSIZE (5 * 16384)
+bool zcFile::copy(zcFile to_file, std::function<void (int)> f_progress_perc)
+{
+    f_progress_perc(0);
+    if (size() <= MAX_BUFSIZE) {
+        bool b = QFile::copy(to_file.absolutePath());
+        if (b) { f_progress_perc(100); }
+        return b;
+    }
+    else {
+        char buf[BUFSIZE];
+        if (QFile::isOpen()) { QFile::close(); }
+        if (to_file.isOpen()) { to_file.close(); }
+        if (QFile::open(QIODevice::ReadOnly)) {
+            qint64 bytes = QFile::size();
+            qint64 written = 0;
+            if (to_file.open(QIODevice::WriteOnly)) {
+                qint64 bytes_read = QFile::read(buf, BUFSIZE);
+                int perc = -1;
+                while (bytes_read == BUFSIZE) {
+                    int e = to_file.write(buf, bytes_read);
+                    if (e >= 0) {
+                        written += bytes_read;
+                        int p = written / bytes;
+                        if (p != perc) { perc = p; f_progress_perc(perc); }
+                        bytes_read = QFile::read(buf, BUFSIZE);
+                    } else {
+                        bytes_read = -1;
+                    }
+                }
+                if (bytes_read == -1) {
+                    QFile::close();
+                    to_file.close();
+                    to_file.remove();
+                    return false;
+                } else {
+                    int e = to_file.write(buf, bytes_read);
+                    if (e < 0) {
+                        QFile::close();
+                        to_file.close();
+                        to_file.remove();
+                        return false;
+                    } else {
+                        f_progress_perc(100);
+                        QFile::close();
+                        to_file.close();
+
+                        if (!to_file.setPermissions(QFile::permissions())) {
+                            LINE_WARNING << "Cannot set permissions on file copied to (" << to_file
+                                         << "), from source file (" << *this << ")";
+                            LINE_WARNING << "Permissable error, function still returns true";
+                        }
+                        return true;
+                    }
+                }
+            } else {
+                QFile::close();
+            }
+        }
+        return false;
+    }
+}
+
+bool zcFile::copy(const QString &to_file)
+{
+    return QFile::copy(to_file);
+}
+
 QIODevice *zcFile::device()
 {
     return this;
@@ -167,7 +236,7 @@ QString zcFile::basenameNoExt() const
 
 bool zcFile::copyWrt(QString toFileName)
 {
-    if (this->copy(toFileName)) {
+    if (QFile::copy(toFileName)) {
         zcFile f(toFileName);
         return f.setPermissions(QFile::WriteOwner|QFile::WriteGroup|QFile::ReadOwner|QFile::ReadGroup);
     } else {

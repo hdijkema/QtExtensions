@@ -90,6 +90,23 @@ public:
 
     zcFile findBasename(const QString &name, QDir basedir, bool recursive, bool &found);
 
+    /**
+     * @brief copy - copies the current file to to_file with the same permissions
+     *        reports progress in percentage via f_progress_perc.
+     *        Closes this file if it exists and is open also closes to_file if it exists and is open.
+     * @param to_file
+     * @param f_progress_perc
+     * @return false, if the copy operation did not succeed.
+     */
+    bool copy(zcFile to_file, std::function<void (int)> f_progress_perc);
+
+    /**
+     * @brief copy - calls QFile::copy
+     * @param to_file
+     * @return
+     */
+    bool copy(const QString &to_file);
+
 public:
     QIODevice *device();
 };
